@@ -1,15 +1,17 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Importar el hook useNavigate
 import './Login.css';
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+    const navigate = useNavigate(); // Inicializa el hook de navegación
 
     const handleLogin = () => {
         if (email === 'facturapro@gmail.com' && password === 'factura123') {
-            // Redirigir o hacer algo si las credenciales son correctas
-            alert('Inicio de sesión exitoso');
+            // Redirigir a la página registrofa.jsx si las credenciales son correctas
+            navigate('/registrofac');
         } else {
             // Mostrar mensaje de error si las credenciales no coinciden
             setErrorMessage('Correo o contraseña incorrectos');
