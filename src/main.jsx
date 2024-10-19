@@ -9,6 +9,8 @@ import Register from './pages/auth/Register'
 import Home from './pages/Home'
 import './pages/Home.css';
 import Egresos from './pages/Egresos'
+import RegistroFac from './pages/RegistroFac'
+import './pages/RegistroFac.css';
 
 let router = createBrowserRouter([
   {
@@ -22,6 +24,10 @@ let router = createBrowserRouter([
   {
     path: '/',
     element: <Home />
+  },
+  {
+    path: '/RegistroFac',
+    element: <RegistroFac/>
   },
   {
     path: '/Egresos',
