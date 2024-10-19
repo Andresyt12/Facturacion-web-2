@@ -9,7 +9,7 @@ const Home = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       navigate('/Login');
-    }, 2000); // Redirigir después de 5 segundos
+    }, 1000); // Redirigir después de 5 segundos
 
     return () => clearTimeout(timer); // Limpiar el temporizador cuando el componente se desmonte
   }, [navigate]);
