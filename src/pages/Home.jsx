@@ -1,5 +1,5 @@
 
-import React, { useEffect } from 'react';
+import  { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Home.css';
 
@@ -8,17 +8,22 @@ const Home = () => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      navigate('/login');
-    }, 5000); // Redirigir después de 5 segundos
+      navigate('/Login');
+    }, 2000); // Redirigir después de 5 segundos
 
     return () => clearTimeout(timer); // Limpiar el temporizador cuando el componente se desmonte
   }, [navigate]);
 
   return (
-    <div className="home-container">
-      <img src="/public/img/loginPro.jpeg" alt="Logo" className="logo" /> {/* No import, just use relative path */}
-    </div>
-  );
+    
+  <div className="home-container">
+    
+    <img src="/img/loginPro.jpeg" alt="Logo" className="logo" />
+
+  </div>
+);
+
+
 };
 
 export default Home;
