@@ -5,7 +5,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';  // Aseg
 // Importa los componentes de las páginas
 import Home from './pages/Home';
 import Login from './pages/auth/Login';
-import Register from './pages/auth/Register';
+import Register from './pages/Register';
 import Egresos from './pages/Egresos';
 import RegistroFac from './pages/RegistroFac';
 
@@ -22,6 +22,10 @@ const router = createBrowserRouter([
   {
     path: '/registroFac',  // Ruta para Register
     element: <RegistroFac />
+  },
+  {
+    path: '/register',  // Ruta para Egresos
+    element: <Register />
   },
   {
     path: '/egresos',  // Ruta para Egresos
