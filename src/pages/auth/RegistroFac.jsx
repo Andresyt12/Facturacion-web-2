@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './RegistroFac.css';
 
-
 const RegistroFac = () => {
   const [factura, setFactura] = useState({
     numero: '',
@@ -13,39 +12,45 @@ const RegistroFac = () => {
     fecha: ''
   });
 
+  // Función para manejar los cambios en los inputs
   const handleChange = (e) => {
     setFactura({ ...factura, [e.target.name]: e.target.value });
   };
 
+  // Función para manejar el envío del formulario
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Factura registrada:', factura);
+
+    // Guardar en localStorage
+    localStorage.setItem('factura', JSON.stringify(factura));
+
     alert('Factura registrada con éxito');
   };
 
   return (
     <section className="factura-pro">
       <aside className="sidebar">
-                <div className="admin-icon">
-                    <img src="public\img\loginPro.jpeg" alt="Profile Icon" className="login" />
-                </div>
-                
-                <nav>
-                    <div className='menu'>
-                    <ul>
-                        <li>
-                            <Link to="/RegistroFac">Facturas</Link>
-                        </li>
-                        <li>
-                            <Link to="/Register">Gastos</Link>
-                        </li>
-                        <li>
-                            <Link to="/Egresos">Reportes</Link>
-                        </li>
-                    </ul>
-                    </div>
-                </nav>
-            </aside>
+        <div className="admin-icon">
+          <img src="public/img/loginPro.jpeg" alt="Profile Icon" className="login" />
+        </div>
+        
+        <nav>
+          <div className='menu'>
+            <ul>
+              <li>
+                <Link to="/RegistroFac">Facturas</Link>
+              </li>
+              <li>
+                <Link to="/Register">Gastos</Link>
+              </li>
+              <li>
+                <Link to="/Egresos">Reportes</Link>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </aside>
 
       <main className="main-content">
         <h1>Ingresar Facturas</h1>
@@ -66,7 +71,7 @@ const RegistroFac = () => {
               Monto:
               <input
                 type="number"
-                name="monto"
+                name="Monto"
                 value={factura.monto}
                 onChange={handleChange}
                 required
