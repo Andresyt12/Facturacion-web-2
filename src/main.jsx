@@ -1,42 +1,45 @@
-import React, { StrictMode } from 'react';  // Asegúrate de importar React
-import { createRoot } from 'react-dom/client';  // Importa createRoot de 'react-dom/client'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';  // Asegúrate de importar RouterProvider
+import React, { StrictMode } from 'react';  
+import { createRoot } from 'react-dom/client'; 
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';  
 
-// Importa los componentes de las páginas
 import Home from './pages/Home';
-import Login from './pages/auth/Login';
-import Register from './pages/Register';
-import Egresos from './pages/Egresos';
-import RegistroFac from './pages/RegistroFac';
+import Login from './pages/Login';
+import Register from './pages/auth/Register';
+import Egresos from './pages/auth/Egresos';
+import RegistroFac from './pages/auth/RegistroFac';
+import RegistrarUsuario from './pages/RegistrarUsuario';
 
-// Define las rutas de la aplicación
 const router = createBrowserRouter([
   {
-    path: '/',  // Ruta base para el componente Home
+    path: '/',  
     element: <Home />,
   },
   {
-    path: '/login',  // Ruta para Login
+    path: '/login',  
     element: <Login />
   },
   {
-    path: '/registroFac',  // Ruta para Register
+    path: '/registroFac', 
     element: <RegistroFac />
   },
   {
-    path: '/register',  // Ruta para Egresos
+    path: '/register',  
     element: <Register />
   },
   {
-    path: '/egresos',  // Ruta para Egresos
+    path: '/egresos', 
     element: <Egresos />
+  },
+  {
+    path: '/RegistrarUsuario', 
+    element: <RegistrarUsuario /> 
   }
 ]);
 
-// Renderiza la aplicación en el div con ID 'app'
-const root = createRoot(document.getElementById('app'));  // Monta en 'app'
+const root = createRoot(document.getElementById('app'));  
 root.render(
   <StrictMode>
-    <RouterProvider router={router} />  // Usa RouterProvider para proveer las rutas
+    <RouterProvider router={router} />  
   </StrictMode>
 );
+

@@ -1,18 +1,28 @@
 import { useState } from 'react';
+import Swal from 'sweetalert2';
 import './Login.css';
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
 
     const handleLogin = () => {
         if (email === 'facturapro@gmail.com' && password === 'factura123') {
-            // Redirigir o hacer algo si las credenciales son correctas
-            alert('Inicio de sesión exitoso');
+            // Mostrar mensaje de éxito si las credenciales son correctas
+            Swal.fire({
+                title: 'Inicio de sesión exitoso',
+                text: 'Bienvenido a Factura Pro',
+                icon: 'success',
+                confirmButtonText: 'Aceptar'
+            });
         } else {
             // Mostrar mensaje de error si las credenciales no coinciden
-            setErrorMessage('Correo o contraseña incorrectos');
+            Swal.fire({
+                title: 'Inicio de sesión fallido',
+                text: 'Correo o contraseña incorrectos',
+                icon: 'error',
+                confirmButtonText: 'Intentar de nuevo'
+            });
         }
     };
 
@@ -37,7 +47,6 @@ const Login = () => {
                             onChange={(e) => setPassword(e.target.value)}
                         />
                     </section>
-                    {errorMessage && <p className="error-message">{errorMessage}</p>}
                     <a href="#">¿Olvidaste Tu Contraseña?</a>
                     <button type="button" onClick={handleLogin}>Iniciar Sesión</button>
                 </form>
@@ -47,3 +56,4 @@ const Login = () => {
 };
 
 export default Login;
+
