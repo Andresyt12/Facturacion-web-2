@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './RegistroFac.css';
 
-
 const RegistroFac = () => {
   const [factura, setFactura] = useState({
     numero: '',
@@ -26,31 +25,30 @@ const RegistroFac = () => {
   return (
     <section className="factura-pro">
       <aside className="sidebar">
-                <div className="admin-icon">
-                    <img src="public\img\loginPro.jpeg" alt="Profile Icon" className="login" />
-                </div>
-                
-                <nav>
-                    <div className='menu'>
-                    <ul>
-                        <li>
-                            <Link to="/RegistroFac">Facturas</Link>
-                        </li>
-                        <li>
-                            <Link to="/Register">Gastos</Link>
-                        </li>
-                        <li>
-                            <Link to="/Egresos">Reportes</Link>
-                        </li>
-                    </ul>
-                    </div>
-                </nav>
-            </aside>
+        <div className="admin-icon">
+          <img src="public/img/loginPro.jpeg" alt="Profile Icon" className="login" />
+        </div>
+        
+        <nav>
+          <div className='menu'>
+            <ul>
+              <li>
+                <Link to="/RegistroFac">Facturas</Link>
+              </li>
+              <li>
+                <Link to="/Register">Gastos</Link>
+              </li>
+              <li>
+                <Link to="/Egresos">Reportes</Link>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </aside>
 
       <main className="main-content">
         <h1>Ingresar Facturas</h1>
         <div className="form-container">
-        
           <form onSubmit={handleSubmit}>
             <label>
               Número de Factura:
@@ -72,16 +70,21 @@ const RegistroFac = () => {
                 required
               />
             </label>
-            <label>
-              Categoría:
-              <input
-                type="text"
-                name="categoria"
-                value={factura.categoria}
-                onChange={handleChange}
-                required
-              />
-            </label>
+            <label htmlFor="categoria">Categoría:</label>
+            <select
+              id="categoria"
+              name="categoria"
+              value={factura.categoria}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Seleccione una categoría</option>
+              <option value="DDS">DDS</option>
+              <option value="Laptop">Laptop</option>
+              <option value="Audífonos">Audífonos</option>
+              <option value="Tablet">Tablet</option>
+              <option value="Celulares">Celulares</option>
+            </select>
             <label>
               Vendedor:
               <input

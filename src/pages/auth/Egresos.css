@@ -1,28 +1,24 @@
-/* Estilo para el contenedor principal */
+/* --- Estilo para el contenedor principal --- */
 .container {
     display: flex;
     height: 100vh;
 }
 
-
 .sidebar {
     width: 250px;
     background-color: #002855;
     color: white;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
 }
-
 
 .profile img {
     width: 100px;
     margin-bottom: 40px;
     height: 100px;
-
 }
-
 
 .profile p {
     font-size: 18px;
@@ -30,6 +26,7 @@
     margin-bottom: 30px;
 }
 
+/* --- Estilo para el menú de navegación --- */
 .menu {
     list-style: none;
     padding: 0;
@@ -38,11 +35,11 @@
 }
 
 .menu li {
-    list-style: none;
-    padding: 0;
-    width: 100%;
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid white;
+    cursor: pointer;
 }
-
 
 .menu li a {
     color: white;
@@ -53,12 +50,12 @@
     transition: background-color 0.3s, color 0.3s;
 }
 
-
 .menu li a:hover {
+    background-color: #003580;
     color: #FFFFFF;
 }
 
-
+/* --- Estilo para el contenido principal --- */
 .main-content {
     flex: 1;
     background-color: #F1F1F1;
@@ -70,7 +67,6 @@
     text-align: center;
     margin-bottom: 30px;
 }
-
 
 .report {
     display: flex;
@@ -91,7 +87,6 @@
     margin-bottom: 10px;
 }
 
-
 .download-icons {
     display: flex;
     justify-content: space-evenly;
@@ -101,7 +96,6 @@
     width: 40px;
     cursor: pointer;
 }
-
 
 .actions {
     display: flex;
