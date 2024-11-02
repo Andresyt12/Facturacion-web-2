@@ -55,7 +55,6 @@ const RegistroFac = () => {
       <main className="main-content">
         <h1>Ingresar Facturas</h1>
         <div className="form-container">
-        
           <form onSubmit={handleSubmit}>
             <label>
               Número de Factura:
@@ -77,16 +76,21 @@ const RegistroFac = () => {
                 required
               />
             </label>
-            <label>
-              Categoría:
-              <input
-                type="text"
-                name="categoria"
-                value={factura.categoria}
-                onChange={handleChange}
-                required
-              />
-            </label>
+            <label htmlFor="categoria">Categoría:</label>
+            <select
+              id="categoria"
+              name="categoria"
+              value={factura.categoria}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Seleccione una categoría</option>
+              <option value="DDS">DDS</option>
+              <option value="Laptop">Laptop</option>
+              <option value="Audífonos">Audífonos</option>
+              <option value="Tablet">Tablet</option>
+              <option value="Celulares">Celulares</option>
+            </select>
             <label>
               Vendedor:
               <input

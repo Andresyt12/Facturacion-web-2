@@ -88,6 +88,14 @@ input {
     border: 1px solid #ccc;
 }
 
+select {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
 .button-group {
     display: flex;
     justify-content: space-between;
@@ -145,7 +153,8 @@ input {
         padding: 15px;
     }
 
-    input {
+    input,
+    select {
         padding: 8px;
     }
 
@@ -177,7 +186,8 @@ input {
         font-size: 24px;
     }
 
-    input {
+    input,
+    select {
         width: 100%;
         padding: 8px;
     }

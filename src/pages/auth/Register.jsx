@@ -27,7 +27,7 @@ const Register = () => {
         <section className="factura-pro">
             <aside className="sidebar">
                 <div className="admin-icon">
-                    <img src="public\img\loginPro.jpeg" alt="Profile Icon" className="login" />
+                    <img src="public/img/loginPro.jpeg" alt="Profile Icon" className="login" />
                 </div>
                 
                 <nav>
@@ -74,13 +74,19 @@ const Register = () => {
                         </label>
                         <label>
                             Categoría:
-                            <input
-                                type="text"
+                            <select
                                 name="categoria"
                                 value={factura.categoria}
                                 onChange={handleChange}
                                 required
-                            />
+                            >
+                                <option value="">Seleccione una categoría</option>
+                                <option value="DDS">DDS</option>
+                                <option value="Laptop">Laptop</option>
+                                <option value="Audífonos">Audífonos</option>
+                                <option value="Tablet">Tablet</option>
+                                <option value="Celulares">Celulares</option>
+                            </select>
                         </label>
                         <label>
                             Vendedor:
@@ -122,6 +128,7 @@ const Register = () => {
                                     monto: '',
                                     categoria: '',
                                     vendedor: '',
+                                    ciudad: '',
                                     fecha: ''
                                 })}
                             >
