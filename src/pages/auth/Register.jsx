@@ -34,10 +34,10 @@ const Register = () => {
                     <div className='menu'>
                     <ul>
                         <li>
-                            <Link to="/factuapro">Registro de Facturas</Link>
+                            <Link to="/RegistroFac">Registro de Facturas</Link>
                         </li>
                         <li>
-                            <Link to="/registro">Control de Gastos</Link>
+                            <Link to="/Register">Control de Gastos</Link>
                         </li>
                         <li>
                             <Link to="/Egresos">Reportes Financieros</Link>

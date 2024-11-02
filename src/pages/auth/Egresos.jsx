@@ -13,8 +13,8 @@ const Egresos = () => {
                 
                 
                 <ul className="menu">
-                    <li><a href="/FacturaPro">Registro de Facturas</a></li>
-                    <li><a href="/Registro">Control de Gastos</a></li>
+                    <li><a href="/RegistroFac">Registro de Facturas</a></li>
+                    <li><a href="/Register">Control de Gastos</a></li>
                     <li><a href="/Egresos">Reportes Financieros</a></li>
                 </ul>
             </div>

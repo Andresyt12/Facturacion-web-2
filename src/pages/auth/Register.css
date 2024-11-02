@@ -26,10 +26,11 @@
 .admin-icon {
     text-align: center;
     margin-bottom: 20px;
+    
 }
 
 .admin-icon span {
-    font-size: 50px;
+    font-size: 30px;
 }
 
 .sidebar nav ul {
