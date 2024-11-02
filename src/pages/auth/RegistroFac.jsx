@@ -34,13 +34,13 @@ const RegistroFac = () => {
                     <div className='menu'>
                     <ul>
                         <li>
-                            <Link to="/RegistroFac">Registro de Facturas</Link>
+                            <Link to="/RegistroFac">Facturas</Link>
                         </li>
                         <li>
-                            <Link to="/Register">Control de Gastos</Link>
+                            <Link to="/Register">Gastos</Link>
                         </li>
                         <li>
-                            <Link to="/Egresos">Reportes Financieros</Link>
+                            <Link to="/Egresos">Reportes</Link>
                         </li>
                     </ul>
                     </div>
@@ -48,9 +48,9 @@ const RegistroFac = () => {
             </aside>
 
       <main className="main-content">
-        <h1>Registros de Factura</h1>
+        <h1>Ingresar Facturas</h1>
         <div className="form-container">
-          <h2>Registro y Almacenamiento de factura</h2>
+        
           <form onSubmit={handleSubmit}>
             <label>
               Número de Factura:
@@ -113,7 +113,7 @@ const RegistroFac = () => {
               />
             </label>
             <div className="button-group">
-              <button type="submit" className="register-btn">Registrar</button>
+              <button type="submit" className="register-btn">Guardar</button>
               <button 
                 type="button" 
                 className="cancel-btn" 
