@@ -50,7 +50,7 @@ const Register = () => {
             <main className="main-content">
                 <h1>Registros de Factura</h1>
                 <div className="form-container">
-                    <h2>Registro y Almacenamiento de factura</h2>
+                    <h2>Control de Gastos</h2>
                     <form onSubmit={handleSubmit}>
                         <label>
                             Número de Factura:

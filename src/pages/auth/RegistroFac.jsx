@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './RegistroFac.css';
 
+
 const RegistroFac = () => {
   const [factura, setFactura] = useState({
     numero: '',
@@ -25,20 +26,26 @@ const RegistroFac = () => {
   return (
     <section className="factura-pro">
       <aside className="sidebar">
-        <div className="admin-icon">
-          <span className="login">
-            <img src="public/img/loginPro.jpeg" alt="Profile Icon" />
-          </span>
-        </div>
-        
-        <nav>
-          <ul>
-            <li><Link to="/Register">Registro de Facturas</Link></li>
-            <li><Link to="/RegistroFac">Control de Gastos</Link></li>
-            <li><Link to="/Egresos">Reportes Financieros</Link></li>
-          </ul>
-        </nav>
-      </aside>
+                <div className="admin-icon">
+                    <img src="public\img\loginPro.jpeg" alt="Profile Icon" className="login" />
+                </div>
+                
+                <nav>
+                    <div className='menu'>
+                    <ul>
+                        <li>
+                            <Link to="/RegistroFac">Registro de Facturas</Link>
+                        </li>
+                        <li>
+                            <Link to="/Register">Control de Gastos</Link>
+                        </li>
+                        <li>
+                            <Link to="/Egresos">Reportes Financieros</Link>
+                        </li>
+                    </ul>
+                    </div>
+                </nav>
+            </aside>
 
       <main className="main-content">
         <h1>Registros de Factura</h1>
