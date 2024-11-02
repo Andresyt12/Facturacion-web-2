@@ -1,195 +1,198 @@
-/* CSS Variables for colors */
-:root {
-    --primary-color: #003366;
-    --secondary-color: #f4f4f4;
-    --hover-color: #0056b3;
-    --header-bg-color: #e7f1ff;
-    --border-color: #ccc;
-    --sidebar-bg-color: #002855;
-    --sidebar-text-color: white;
-    --sidebar-item-hover-bg: #1a73e8;
+/* --- Clases principales --- */
+
+.factura-pro {
+    display: flex;
+    height: 100vh;
+    font-family: 'Arial', sans-serif;
+    flex-direction: row;
 }
 
-/* Login Image */
+.sidebar {
+    width: 250px;
+    background-color: #002366;
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .login {
     width: 180px;
-    height: auto;
+    height: 100px;
     margin-bottom: 1rem;
     margin-left: auto;
     margin-right: auto;
 }
 
-/* Global styles */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* Main Container */
-.registro-section {
-    display: flex;
-    height: 100vh;
-    overflow: hidden;
-}
-
-/* Sidebar */
-.sidebar {
-    width: 250px;
-    background-color: var(--sidebar-bg-color);
-    padding: 20px;
-    color: var(--sidebar-text-color);
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-}
-
-.profile {
-    display: flex;
-    align-items: center;
+.admin-icon {
+    text-align: center;
     margin-bottom: 20px;
 }
 
-.profile-icon {
-    width: 50px;
-    height: 50px;
-    margin-right: 10px;
+.admin-icon span {
+    font-size: 50px;
 }
 
-.role {
-    font-weight: bold;
-    color: var(--sidebar-text-color);
-}
-
-.menu {
+.sidebar nav ul {
     list-style-type: none;
     padding: 0;
-    margin: 0;
+    width: 100%;
 }
 
-.menu li {
-    padding: 10px 0;
+.sidebar nav ul li {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid white;
     cursor: pointer;
-    color: var(--sidebar-text-color);
-    transition: background-color 0.3s, padding-left 0.3s;
 }
 
-.menu li:hover {
-    background-color: var(--sidebar-item-hover-bg);
-    border-radius: 4px;
-    padding-left: 10px;
+.sidebar nav ul li:hover {
+    background-color: #003580;
 }
 
-.menu li.active {
-    background-color: var(--primary-color);
-    padding: 10px;
-    border-radius: 5px;
-}
-
-/* Main Content */
 .main-content {
-    flex: 1;
+    flex-grow: 1;
     padding: 20px;
-    background-color: white;
+    background-color: #f2f2f2;
     overflow-y: auto;
 }
 
-/* Header Section */
-.header {
+h1 {
+    color: #003366;
+    font-size: 36px;
+}
+
+.form-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.button-group {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
 }
 
-.title {
-    font-size: 36px;
-    color: var(--primary-color);
-    margin-right: 20px;
-    flex: 1;
-}
-
-.date-selector {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-/* Inputs and Button Styles */
-.date-input,
-.search-input {
-    padding: 10px;
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
-    transition: border-color 0.3s, box-shadow 0.3s;
-    outline: none;
-}
-
-.date-input:focus,
-.search-input:focus {
-    border-color: var(--primary-color);
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-}
-
-.search-button {
-    padding: 10px 20px;
-    cursor: pointer;
-    background-color: var(--primary-color);
+.register-btn {
+    background-color: #03A9F4;
     color: white;
+    padding: 10px 20px;
     border: none;
     border-radius: 5px;
-    transition: background-color 0.3s, box-shadow 0.3s;
-    outline: none;
+    cursor: pointer;
 }
 
-.search-button:hover {
-    background-color: var(--hover-color);
-    box-shadow: 0 0 10px rgba(0, 86, 179, 0.5);
+.cancel-btn {
+    background-color: #003366;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-/* Invoice Table */
-.invoice-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    table-layout: fixed;
+.register-btn:hover, .cancel-btn:hover {
+    opacity: 0.8;
 }
 
-.invoice-table th,
-.invoice-table td {
-    border: 1px solid var(--border-color);
-    padding: 10px;
-    text-align: left;
-    word-wrap: break-word;
-}
+/* --- Media Queries para Responsividad --- */
 
-.invoice-table th {
-    background-color: var(--header-bg-color);
-    color: var(--primary-color);
-}
-
-/* Responsive Design */
+/* Tablets (hasta 768px) */
 @media (max-width: 768px) {
-    .registro-section {
+    .factura-pro {
         flex-direction: column;
     }
 
     .sidebar {
         width: 100%;
-        flex-direction: row;
-        justify-content: space-between;
+        padding: 10px;
     }
 
-    .menu {
-        display: flex;
-        flex-direction: row;
-        gap: 10px;
+    .sidebar nav ul li {
+        padding: 10px;
+        font-size: 14px;
     }
 
     .main-content {
         padding: 10px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    .form-container {
+        padding: 15px;
+    }
+
+    input {
+        padding: 8px;
+    }
+
+    .button-group {
+        flex-direction: column;
+    }
+
+    .register-btn, .cancel-btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+/* Móviles (hasta 480px) */
+@media (max-width: 480px) {
+    .sidebar {
+        display: none; /* Escondemos la sidebar en pantallas muy pequeñas */
+    }
+
+    .factura-pro {
+        padding: 0;
+    }
+
+    .main-content {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    input {
+        width: 100%;
+        padding: 8px;
+    }
+
+    .form-container {
+        padding: 10px;
+    }
+
+    .button-group {
+        flex-direction: column;
+    }
+
+    .register-btn, .cancel-btn {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
     }
 }
