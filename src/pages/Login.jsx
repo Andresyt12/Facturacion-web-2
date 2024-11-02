@@ -33,7 +33,7 @@ const Login = () => {
     return (
         <section className="login-container">
             <div className="login-box">
-                <img className="logo" src="/public/img/loginPro.jpeg" alt="logo" />
+                <img className="logo" src="img/loginPro.jpeg" alt="logo" />
                 <form>
                     <section>
                         <label>Email</label>
