@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom'; // Importa el componente Link
+import './Egresos.css';
 import './Register.css';
 
 const Register = () => {
@@ -28,11 +29,12 @@ const Register = () => {
                 <div className="admin-icon">
                     <img src="public\img\loginPro.jpeg" alt="Profile Icon" className="login" />
                 </div>
-                <p>Administrador</p>
+                
                 <nav>
+                    <div className='menu'>
                     <ul>
                         <li>
-                            <Link to="/facturapro">Registro de Facturas</Link>
+                            <Link to="/factuapro">Registro de Facturas</Link>
                         </li>
                         <li>
                             <Link to="/registro">Control de Gastos</Link>
@@ -41,6 +43,7 @@ const Register = () => {
                             <Link to="/Egresos">Reportes Financieros</Link>
                         </li>
                     </ul>
+                    </div>
                 </nav>
             </aside>
 
