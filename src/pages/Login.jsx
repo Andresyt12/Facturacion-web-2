@@ -51,7 +51,7 @@ const Login = () => {
                             onChange={(e) => setPassword(e.target.value)}
                         />
                     </section>
-                    <a href="#">¿Olvidaste Tu Contraseña?</a>
+                    <a href="/RegistrarUsuario">Crea tu Usuario</a>
                     <button type="button" onClick={handleLogin}>Iniciar Sesión</button>
                 </form>
             </div>

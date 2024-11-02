@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import './RegistroUsuario.css';
 
@@ -8,6 +9,8 @@ function RegistrarUsuario() {
     correo: '',
     contrasena: ''
   });
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({
@@ -25,6 +28,9 @@ function RegistrarUsuario() {
       text: 'Usuario registrado correctamente',
       icon: 'success',
       confirmButtonText: 'Aceptar'
+    }).then(() => {
+      // Redirigir a la página de login
+      navigate('/login');
     });
   };
 
@@ -71,3 +77,4 @@ function RegistrarUsuario() {
 }
 
 export default RegistrarUsuario;
+
