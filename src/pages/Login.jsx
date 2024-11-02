@@ -1,19 +1,23 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import './Login.css';
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
 
     const handleLogin = () => {
         if (email === 'facturapro@gmail.com' && password === 'factura123') {
-            // Mostrar mensaje de éxito si las credenciales son correctas
+            // Mostrar mensaje de éxito y redirigir al usuario a la página de registro
             Swal.fire({
                 title: 'Inicio de sesión exitoso',
                 text: 'Bienvenido a Factura Pro',
                 icon: 'success',
                 confirmButtonText: 'Aceptar'
+            }).then(() => {
+                navigate('/register'); // Redirige a la página de registro
             });
         } else {
             // Mostrar mensaje de error si las credenciales no coinciden
