@@ -33,8 +33,8 @@ const RegistroFac = () => {
         
         <nav>
           <ul>
-            <li><Link to="/factuapro">Registro de Facturas</Link></li>
-            <li><Link to="/registro">Control de Gastos</Link></li>
+            <li><Link to="/Register">Registro de Facturas</Link></li>
+            <li><Link to="/RegistroFac">Control de Gastos</Link></li>
             <li><Link to="/Egresos">Reportes Financieros</Link></li>
           </ul>
         </nav>
