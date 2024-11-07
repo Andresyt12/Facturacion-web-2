@@ -6,7 +6,7 @@
 
 .sidebar {
     width: 250px;
-    background-color: #002855;
+    background-color: #002366;
     color: white;
     padding: 20px;
     display: flex;
@@ -111,15 +111,6 @@
     cursor: pointer;
 }
 
-.guardar {
-    background-color: #03A9F4;
-    color: white;
-}
-
-.cancelar {
-    background-color: #003366;
-    color: white;
-}
 
 .btn:hover {
     opacity: 0.8;

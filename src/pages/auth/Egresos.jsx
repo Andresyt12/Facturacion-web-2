@@ -4,6 +4,8 @@ import './Egresos.css';
 const Egresos = () => {
   // Estado para almacenar la factura recuperada de localStorage
   const [factura, setFactura] = useState(null);
+  const [fechaFiltro, setFechaFiltro] = useState('');
+  const [ciudadFiltro, setCiudadFiltro] = useState('');
 
   useEffect(() => {
     // Recuperar los datos de factura desde localStorage al cargar el componente
@@ -45,6 +47,25 @@ const Egresos = () => {
     link.click();
   };
 
+  const handleFechaChange = (e) => {
+    setFechaFiltro(e.target.value);
+  };
+
+  const handleCiudadChange = (e) => {
+    setCiudadFiltro(e.target.value);
+  };
+
+  // Filtrar factura por fecha y ciudad
+  const facturaFiltrada = factura && 
+    (fechaFiltro === '' || factura.fecha.includes(fechaFiltro)) && 
+    (ciudadFiltro === '' || factura.ciudad.includes(ciudadFiltro)) ? factura : null;
+
+  // Función para manejar el logout
+  const handleLogout = () => {
+    // Aquí podrías limpiar cualquier estado o localStorage si es necesario
+    window.location.href = '/Login'; // Redirige a la página de inicio de sesión
+  };
+
   return (
     <div className="container">
       <div className="sidebar">
@@ -57,10 +78,21 @@ const Egresos = () => {
           <li><a href="/Register">Gastos</a></li>
           <li><a href="/Egresos">Reportes</a></li>
         </ul>
+        <button className="logout-btn" onClick={handleLogout}>Salir</button>
       </div>
 
       <main className="main-content">
         <h1>Reporte sobre ingresos y egresos</h1>
+        <div className="filtros">
+          <label>
+            Filtrar por fecha:
+            <input type="date" value={fechaFiltro} onChange={handleFechaChange} />
+          </label>
+          <label>
+            Filtrar por ciudad:
+            <input type="text" value={ciudadFiltro} onChange={handleCiudadChange} placeholder="Ciudad" />
+          </label>
+        </div>
         <section className="report">
           <section className="section">
             <h2>Ingresos</h2>
@@ -77,14 +109,21 @@ const Egresos = () => {
             </div>
           </section>
         </section>
-
-        <div className="actions">
-          <button className="btn guardar">Guardar</button>
-          <button className="btn cancelar">Cancelar</button>
-        </div>
+        {facturaFiltrada && (
+          <div className="factura">
+            <h2>Factura Registrada:</h2>
+            <p>Número: {facturaFiltrada.numero}</p>
+            <p>Monto: {facturaFiltrada.monto}</p>
+            <p>Categoría: {facturaFiltrada.categoria}</p>
+            <p>Vendedor: {facturaFiltrada.vendedor}</p>
+            <p>Ciudad: {facturaFiltrada.ciudad}</p>
+            <p>Fecha: {facturaFiltrada.fecha}</p>
+          </div>
+        )}
       </main>
     </div>
   );
 };
 
 export default Egresos;
+
