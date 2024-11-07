@@ -1,6 +1,8 @@
 import React, { StrictMode } from 'react';  
 import { createRoot } from 'react-dom/client'; 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';  
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
 
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -8,6 +10,8 @@ import Register from './pages/auth/Register';
 import Egresos from './pages/auth/Egresos';
 import RegistroFac from './pages/auth/RegistroFac';
 import RegistrarUsuario from './pages/RegistrarUsuario';
+
+
 
 const router = createBrowserRouter([
   {
