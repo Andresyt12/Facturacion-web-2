@@ -1,8 +1,11 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './RegistroFac.css';
+import { FaSignOutAlt } from 'react-icons/fa'; 
 
 const RegistroFac = () => {
+  const navigate = useNavigate(); 
+  
   const [factura, setFactura] = useState({
     numero: '',
     monto: '',
@@ -26,6 +29,10 @@ const RegistroFac = () => {
     localStorage.setItem('factura', JSON.stringify(factura));
 
     alert('Factura registrada con éxito');
+  };
+
+  const handleLogout = () => {
+    navigate('/Login');
   };
 
   return (
@@ -53,6 +60,11 @@ const RegistroFac = () => {
       </aside>
 
       <main className="main-content">
+        {/* Botón de Salir en la parte superior derecha */}
+        <button className="logout-btn" onClick={handleLogout}>
+          <FaSignOutAlt />
+        </button>
+
         <h1>Ingresar Facturas</h1>
         <div className="form-container">
           <form onSubmit={handleSubmit}>
@@ -146,3 +158,4 @@ const RegistroFac = () => {
 };
 
 export default RegistroFac;
+

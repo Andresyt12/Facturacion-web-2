@@ -1,14 +1,16 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Egresos.css';
 import './Register.css';
+import { FaSignOutAlt } from 'react-icons/fa';
 
 const Register = () => {
+    const navigate = useNavigate(); 
+
     const [factura, setFactura] = useState({
         numero: '',
         monto: '',
         categoria: '',
-        vendedor: '',
         ciudad: '',
         fecha: ''
     });
@@ -23,6 +25,10 @@ const Register = () => {
         alert('Factura registrada con éxito');
     };
 
+    const handleLogout = () => {
+        navigate('/Login');
+    };
+
     return (
         <section className="factura-pro">
             <aside className="sidebar">
@@ -32,26 +38,30 @@ const Register = () => {
                 
                 <nav>
                     <div className='menu'>
-                    <ul>
-                        <li>
-                            <Link to="/RegistroFac">Facturas</Link>
-                        </li>
-                        <li>
-                            <Link to="/Register">Gastos</Link>
-                        </li>
-                        <li>
-                            <Link to="/Egresos">Reportes</Link>
-                        </li>
-                    </ul>
+                        <ul>
+                            <li>
+                                <Link to="/RegistroFac">Facturas</Link>
+                            </li>
+                            <li>
+                                <Link to="/Register">Gastos</Link>
+                            </li>
+                            <li>
+                                <Link to="/Egresos">Reportes</Link>
+                            </li>
+                        </ul>
                     </div>
                 </nav>
             </aside>
 
             <main className="main-content">
-                <h1>Ingresar Gastos</h1>
-                <div className="form-container">
-                    
-                    <form onSubmit={handleSubmit}>
+                <button className="logout-btn" onClick={handleLogout}>
+                    <FaSignOutAlt size={20} />
+                </button>
+
+                <h1>Busqueda de factura</h1>
+                
+                <div className="input-container">
+                    <form onSubmit={handleSubmit} className="horizontal-form">
                         <label>
                             Número de Factura:
                             <input
@@ -89,16 +99,6 @@ const Register = () => {
                             </select>
                         </label>
                         <label>
-                            Vendedor:
-                            <input
-                                type="text"
-                                name="vendedor"
-                                value={factura.vendedor}
-                                onChange={handleChange}
-                                required
-                            />
-                        </label>
-                        <label>
                             Ciudad:
                             <input
                                 type="text"
@@ -119,7 +119,7 @@ const Register = () => {
                             />
                         </label>
                         <div className="button-group">
-                            <button type="submit" className="register-btn">Guardar</button>
+                            <button type="submit" className="register-btn">Buscar</button>
                             <button 
                                 type="button" 
                                 className="cancel-btn" 
@@ -127,7 +127,6 @@ const Register = () => {
                                     numero: '',
                                     monto: '',
                                     categoria: '',
-                                    vendedor: '',
                                     ciudad: '',
                                     fecha: ''
                                 })}
@@ -137,9 +136,14 @@ const Register = () => {
                         </div>
                     </form>
                 </div>
+                
+                <div className="results-container">
+                   
+                </div>
             </main>
         </section>
     );
 };
 
 export default Register;
+
