@@ -17,16 +17,16 @@ const RegistroFac = () => {
 
   // Inicializamos con 10 registros predeterminados
   const [facturasList, setFacturasList] = useState([
-    { numero: '001', monto: '1000', categoria: 'Laptop', vendedor: 'Carlos', ciudad: 'Madrid', fecha: '2024-11-01' },
-    { numero: '002', monto: '150', categoria: 'Celulares', vendedor: 'Ana', ciudad: 'Barcelona', fecha: '2024-11-02' },
-    { numero: '003', monto: '300', categoria: 'Tablet', vendedor: 'Luis', ciudad: 'Valencia', fecha: '2024-11-03' },
-    { numero: '004', monto: '800', categoria: 'Laptop', vendedor: 'Marta', ciudad: 'Sevilla', fecha: '2024-11-04' },
-    { numero: '005', monto: '500', categoria: 'Audífonos', vendedor: 'Raúl', ciudad: 'Bilbao', fecha: '2024-11-05' },
-    { numero: '006', monto: '250', categoria: 'DDS', vendedor: 'Sofia', ciudad: 'Madrid', fecha: '2024-11-06' },
-    { numero: '007', monto: '100', categoria: 'Celulares', vendedor: 'José', ciudad: 'Malaga', fecha: '2024-11-07' },
-    { numero: '008', monto: '1200', categoria: 'Laptop', vendedor: 'Elena', ciudad: 'Barcelona', fecha: '2024-11-08' },
-    { numero: '009', monto: '200', categoria: 'Audífonos', vendedor: 'Daniel', ciudad: 'Valencia', fecha: '2024-11-09' },
-    { numero: '010', monto: '50', categoria: 'Tablet', vendedor: 'Pedro', ciudad: 'Sevilla', fecha: '2024-11-10' }
+    { numero: '001', monto: '1000', categoria: 'Laptop', vendedor: 'Carlos', ciudad: 'Medellin', fecha: '2024-11-01' },
+    { numero: '002', monto: '150', categoria: 'Celulares', vendedor: 'Ana', ciudad: 'Cali', fecha: '2024-11-02' },
+    { numero: '003', monto: '300', categoria: 'Tablet', vendedor: 'Luis', ciudad: 'Bogota', fecha: '2024-11-03' },
+    { numero: '004', monto: '800', categoria: 'Laptop', vendedor: 'Marta', ciudad: 'Cartagena', fecha: '2024-11-04' },
+    { numero: '005', monto: '500', categoria: 'Audífonos', vendedor: 'Raúl', ciudad: 'Cali', fecha: '2024-11-05' },
+    { numero: '006', monto: '250', categoria: 'DDS', vendedor: 'Sofia', ciudad: 'Medellin', fecha: '2024-11-06' },
+    { numero: '007', monto: '100', categoria: 'Celulares', vendedor: 'José', ciudad: 'Bogota', fecha: '2024-11-07' },
+    { numero: '008', monto: '1200', categoria: 'Laptop', vendedor: 'Elena', ciudad: 'Medellin', fecha: '2024-11-08' },
+    { numero: '009', monto: '200', categoria: 'Audífonos', vendedor: 'Daniel', ciudad: 'Cali', fecha: '2024-11-09' },
+    { numero: '010', monto: '50', categoria: 'Tablet', vendedor: 'Pedro', ciudad: 'Bogota', fecha: '2024-11-10' }
   ]);
 
   // Función para manejar los cambios en los inputs
