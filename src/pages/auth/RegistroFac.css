@@ -6,6 +6,45 @@
     font-family: 'Arial', sans-serif;
     flex-direction: row;
 }
+/* Estilos para el contenedor de la lista de facturas */
+.results-container {
+    margin-top: 20px;
+}
+
+/* Estilo para la cuadrícula de las facturas */
+.factura-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Tres columnas */
+    gap: 20px; /* Espacio entre los elementos */
+    margin-top: 20px;
+}
+
+/* Estilo para cada item de factura */
+.factura-item {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.factura-item div {
+    margin-bottom: 10px;
+}
+
+.factura-item button {
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #002366;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.factura-item button:hover {
+    background-color: #002366;
+}
+
 
 .sidebar {
     width: 250px;

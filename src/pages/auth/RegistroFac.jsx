@@ -15,6 +15,20 @@ const RegistroFac = () => {
     fecha: ''
   });
 
+  // Inicializamos con 10 registros predeterminados
+  const [facturasList, setFacturasList] = useState([
+    { numero: '001', monto: '1000', categoria: 'Laptop', vendedor: 'Carlos', ciudad: 'Madrid', fecha: '2024-11-01' },
+    { numero: '002', monto: '150', categoria: 'Celulares', vendedor: 'Ana', ciudad: 'Barcelona', fecha: '2024-11-02' },
+    { numero: '003', monto: '300', categoria: 'Tablet', vendedor: 'Luis', ciudad: 'Valencia', fecha: '2024-11-03' },
+    { numero: '004', monto: '800', categoria: 'Laptop', vendedor: 'Marta', ciudad: 'Sevilla', fecha: '2024-11-04' },
+    { numero: '005', monto: '500', categoria: 'Audífonos', vendedor: 'Raúl', ciudad: 'Bilbao', fecha: '2024-11-05' },
+    { numero: '006', monto: '250', categoria: 'DDS', vendedor: 'Sofia', ciudad: 'Madrid', fecha: '2024-11-06' },
+    { numero: '007', monto: '100', categoria: 'Celulares', vendedor: 'José', ciudad: 'Malaga', fecha: '2024-11-07' },
+    { numero: '008', monto: '1200', categoria: 'Laptop', vendedor: 'Elena', ciudad: 'Barcelona', fecha: '2024-11-08' },
+    { numero: '009', monto: '200', categoria: 'Audífonos', vendedor: 'Daniel', ciudad: 'Valencia', fecha: '2024-11-09' },
+    { numero: '010', monto: '50', categoria: 'Tablet', vendedor: 'Pedro', ciudad: 'Sevilla', fecha: '2024-11-10' }
+  ]);
+
   // Función para manejar los cambios en los inputs
   const handleChange = (e) => {
     setFactura({ ...factura, [e.target.name]: e.target.value });
@@ -23,16 +37,28 @@ const RegistroFac = () => {
   // Función para manejar el envío del formulario
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Factura registrada:', factura);
-
-    // Guardar en localStorage
-    localStorage.setItem('factura', JSON.stringify(factura));
-
+    // Guardamos el nuevo registro en la lista
+    setFacturasList([...facturasList, factura]);
+    // Limpiamos los campos del formulario
+    setFactura({
+      numero: '',
+      monto: '',
+      categoria: '',
+      vendedor: '',
+      ciudad: '',
+      fecha: ''
+    });
     alert('Factura registrada con éxito');
   };
 
   const handleLogout = () => {
     navigate('/Login');
+  };
+
+  const handleDelete = (index) => {
+    // Eliminamos el registro seleccionado
+    const newList = facturasList.filter((_, i) => i !== index);
+    setFacturasList(newList);
   };
 
   return (
@@ -60,9 +86,8 @@ const RegistroFac = () => {
       </aside>
 
       <main className="main-content">
-        {/* Botón de Salir en la parte superior derecha */}
         <button className="logout-btn" onClick={handleLogout}>
-          <FaSignOutAlt />
+          <FaSignOutAlt size={20} />
         </button>
 
         <h1>Ingresar Facturas</h1>
@@ -152,10 +177,26 @@ const RegistroFac = () => {
             </div>
           </form>
         </div>
+
+        <div className="results-container">
+          <h2>Lista de Facturas</h2>
+          <div className="factura-grid">
+            {facturasList.map((factura, index) => (
+              <div key={index} className="factura-item">
+                <div><strong>Factura Nº:</strong> {factura.numero}</div>
+                <div><strong>Monto:</strong> {factura.monto}</div>
+                <div><strong>Categoría:</strong> {factura.categoria}</div>
+                <div><strong>Vendedor:</strong> {factura.vendedor}</div>
+                <div><strong>Ciudad:</strong> {factura.ciudad}</div>
+                <div><strong>Fecha:</strong> {factura.fecha}</div>
+                <button onClick={() => handleDelete(index)} className="delete-btn">Eliminar</button>
+              </div>
+            ))}
+          </div>
+        </div>
       </main>
     </section>
   );
 };
 
 export default RegistroFac;
-

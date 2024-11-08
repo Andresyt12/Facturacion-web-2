@@ -5,7 +5,7 @@ import './Register.css';
 import { FaSignOutAlt } from 'react-icons/fa';
 
 const Register = () => {
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
 
     const [factura, setFactura] = useState({
         numero: '',
@@ -15,18 +15,47 @@ const Register = () => {
         fecha: ''
     });
 
+    // Inicializamos con 10 registros predeterminados
+    const [facturasList, setFacturasList] = useState([
+        { numero: '001', monto: '1000', categoria: 'Laptop', ciudad: 'Medellin', fecha: '2024-11-01' },
+        { numero: '002', monto: '150', categoria: 'Celulares', ciudad: 'Bogota', fecha: '2024-11-02' },
+        { numero: '003', monto: '300', categoria: 'Tablet', ciudad: 'Cali', fecha: '2024-11-03' },
+        { numero: '004', monto: '800', categoria: 'Laptop', ciudad: 'Bucaramanga', fecha: '2024-11-04' },
+        { numero: '005', monto: '500', categoria: 'Audífonos', ciudad: 'Cartagena', fecha: '2024-11-05' },
+        { numero: '006', monto: '250', categoria: 'DDS', ciudad: 'Medellin', fecha: '2024-11-06' },
+        { numero: '007', monto: '100', categoria: 'Celulares', ciudad: 'Cali', fecha: '2024-11-07' },
+        { numero: '008', monto: '1200', categoria: 'Laptop', ciudad: 'Bogota', fecha: '2024-11-08' },
+        { numero: '009', monto: '200', categoria: 'Audífonos', ciudad: 'Medellin', fecha: '2024-11-09' },
+        { numero: '010', monto: '50', categoria: 'Tablet', ciudad: 'Cali', fecha: '2024-11-10' }
+    ]);
+
     const handleChange = (e) => {
         setFactura({ ...factura, [e.target.name]: e.target.value });
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('Factura registrada:', factura);
+        // Guardamos el registro en la lista
+        setFacturasList([...facturasList, factura]);
+        // Limpiamos los campos del formulario
+        setFactura({
+            numero: '',
+            monto: '',
+            categoria: '',
+            ciudad: '',
+            fecha: ''
+        });
         alert('Factura registrada con éxito');
     };
 
     const handleLogout = () => {
         navigate('/Login');
+    };
+
+    const handleDelete = (index) => {
+        // Eliminamos el registro seleccionado
+        const newList = facturasList.filter((_, i) => i !== index);
+        setFacturasList(newList);
     };
 
     return (
@@ -58,7 +87,7 @@ const Register = () => {
                     <FaSignOutAlt size={20} />
                 </button>
 
-                <h1>Busqueda de factura</h1>
+                <h1>Ingresar Gastos</h1>
                 
                 <div className="input-container">
                     <form onSubmit={handleSubmit} className="horizontal-form">
@@ -119,7 +148,7 @@ const Register = () => {
                             />
                         </label>
                         <div className="button-group">
-                            <button type="submit" className="register-btn">Buscar</button>
+                            <button type="submit" className="register-btn">Agregar</button>
                             <button 
                                 type="button" 
                                 className="cancel-btn" 
@@ -131,14 +160,26 @@ const Register = () => {
                                     fecha: ''
                                 })}
                             >
-                                Cancelar
+                                Limpiar
                             </button>
                         </div>
                     </form>
                 </div>
                 
                 <div className="results-container">
-                   
+                    <h2>Lista de Facturas</h2>
+                    <div className="factura-grid">
+                        {facturasList.map((factura, index) => (
+                            <div key={index} className="factura-item">
+                                <div><strong>Factura Nº:</strong> {factura.numero}</div>
+                                <div><strong>Monto:</strong> {factura.monto}</div>
+                                <div><strong>Categoría:</strong> {factura.categoria}</div>
+                                <div><strong>Ciudad:</strong> {factura.ciudad}</div>
+                                <div><strong>Fecha:</strong> {factura.fecha}</div>
+                                <button onClick={() => handleDelete(index)} className="delete-btn">Eliminar</button>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </main>
         </section>
@@ -146,4 +187,5 @@ const Register = () => {
 };
 
 export default Register;
+
 
