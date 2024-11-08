@@ -1,11 +1,18 @@
-// server.js
-const express = require('express');
+import express from 'express';
+import bodyParser from 'body-parser';
+import mongoose from 'mongoose';
+import { guardarRegistro, obtenerRegistros } from './controllers/registroController.js';  // Asegúrate de incluir la extensión '.js'
+
 const app = express();
-const bodyParser = require('body-parser');
-const { guardarRegistro, obtenerRegistros } = require('./controllers/registroController');
 
 // Middleware para parsear JSON
 app.use(bodyParser.json());
+
+// Conectar a MongoDB
+mongoose.connect('mongodb://localhost:27017/miapp')
+.then(() => console.log('Conectado a MongoDB'))
+.catch((error) => console.log('Error al conectar a MongoDB:', error));
+
 
 // Punto final para guardar datos enviados desde RegistroFac
 app.post('/api/registrofac', guardarRegistro);
