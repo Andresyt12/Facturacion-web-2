@@ -82,7 +82,7 @@ const RegistroFac = () => {
               Monto:
               <input
                 type="number"
-                name="Monto"
+                name="monto"
                 value={factura.monto}
                 onChange={handleChange}
                 required
