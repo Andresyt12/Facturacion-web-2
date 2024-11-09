@@ -1,50 +1,58 @@
 import React, { useEffect, useState } from "react";
+import { jsPDF } from "jspdf";
+import * as XLSX from "xlsx";
 import './Egresos.css';
 
 const Egresos = () => {
-  // Estado para almacenar la factura recuperada de localStorage
-  const [factura, setFactura] = useState(null);
+  const [facturas, setFacturas] = useState([]);
   const [fechaFiltro, setFechaFiltro] = useState('');
   const [ciudadFiltro, setCiudadFiltro] = useState('');
 
   useEffect(() => {
-    // Recuperar los datos de factura desde localStorage al cargar el componente
-    const facturaGuardada = localStorage.getItem('factura');
-    if (facturaGuardada) {
-      setFactura(JSON.parse(facturaGuardada));
+    // Recuperar los datos de facturas desde localStorage al cargar el componente
+    const facturasGuardadas = localStorage.getItem('facturas');
+    if (facturasGuardadas) {
+      setFacturas(JSON.parse(facturasGuardadas));
     }
   }, []);
 
-  // Función para descargar la factura en formato PDF
-  const descargarPDF = () => {
-    if (!factura) return;
-    const docContent = `
-      Factura Registrada:
-      Número: ${factura.numero}
-      Monto: ${factura.monto}
-      Categoría: ${factura.categoria}
-      Vendedor: ${factura.vendedor}
-      Ciudad: ${factura.ciudad}
-      Fecha: ${factura.fecha}
-    `;
-
-    const blob = new Blob([docContent], { type: 'application/pdf' });
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.download = 'Factura.pdf';
-    link.click();
+  // Función para obtener facturas filtradas por fecha y ciudad
+  const obtenerFacturasFiltradas = () => {
+    return facturas.filter(factura =>
+      (fechaFiltro === '' || factura.fecha === fechaFiltro) &&
+      (ciudadFiltro === '' || factura.ciudad === ciudadFiltro)
+    );
   };
 
-  // Función para descargar la factura en formato Excel
-  const descargarExcel = () => {
-    if (!factura) return;
-    const csvContent = `Número,Monto,Categoría,Vendedor,Ciudad,Fecha\n${factura.numero},${factura.monto},${factura.categoria},${factura.vendedor},${factura.ciudad},${factura.fecha}`;
+  // Función para descargar las facturas en formato PDF
+  const descargarPDF = () => {
+    const facturasFiltradas = obtenerFacturasFiltradas();
+    if (facturasFiltradas.length === 0) return;
 
-    const blob = new Blob([csvContent], { type: 'text/csv' });
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.download = 'Factura.csv';
-    link.click();
+    const doc = new jsPDF();
+    facturasFiltradas.forEach((factura, index) => {
+      doc.text(`Factura Registrada:`, 10, 10 + (index * 10));
+      doc.text(`Número: ${factura.numero}`, 10, 20 + (index * 10));
+      doc.text(`Monto: ${factura.monto}`, 10, 30 + (index * 10));
+      doc.text(`Categoría: ${factura.categoria}`, 10, 40 + (index * 10));
+      doc.text(`Vendedor: ${factura.vendedor}`, 10, 50 + (index * 10));
+      doc.text(`Ciudad: ${factura.ciudad}`, 10, 60 + (index * 10));
+      doc.text(`Fecha: ${factura.fecha}`, 10, 70 + (index * 10));
+      if (index < facturasFiltradas.length - 1) doc.addPage();
+    });
+
+    doc.save('Facturas.pdf');
+  };
+
+  // Función para descargar las facturas en formato Excel
+  const descargarExcel = () => {
+    const facturasFiltradas = obtenerFacturasFiltradas();
+    if (facturasFiltradas.length === 0) return;
+
+    const worksheet = XLSX.utils.json_to_sheet(facturasFiltradas);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Facturas");
+    XLSX.writeFile(workbook, "Facturas.xlsx");
   };
 
   const handleFechaChange = (e) => {
@@ -55,22 +63,18 @@ const Egresos = () => {
     setCiudadFiltro(e.target.value);
   };
 
-  // Filtrar factura por fecha y ciudad
-  const facturaFiltrada = factura && 
-    (fechaFiltro === '' || factura.fecha.includes(fechaFiltro)) && 
-    (ciudadFiltro === '' || factura.ciudad.includes(ciudadFiltro)) ? factura : null;
-
   // Función para manejar el logout
   const handleLogout = () => {
-    // Aquí podrías limpiar cualquier estado o localStorage si es necesario
     window.location.href = '/Login'; // Redirige a la página de inicio de sesión
   };
+
+  const facturasFiltradas = obtenerFacturasFiltradas();
 
   return (
     <div className="container">
       <div className="sidebar">
         <div className="profile">
-          <img src="public/img/loginPro.jpeg" alt="Logo Factura Pro" />
+          <img src="/img/loginPro.jpeg" alt="Logo Factura Pro" />
         </div>
         
         <ul className="menu">
@@ -90,35 +94,48 @@ const Egresos = () => {
           </label>
           <label>
             Filtrar por ciudad:
-            <input type="text" value={ciudadFiltro} onChange={handleCiudadChange} placeholder="Ciudad" />
+            <select value={ciudadFiltro} onChange={handleCiudadChange}>
+              <option value="">Todas las ciudades</option>
+              <option value="Cali">Cali</option>
+              <option value="Medellin">Medellin</option>
+              <option value="Bogota">Bogota</option>
+              <option value="Pereira">Pereira</option>
+              <option value="Manizalez">Manizalez</option>
+              <option value="Barranquilla">Barranquilla</option>
+              <option value="Cartagena">Cartagena</option>
+            </select>
           </label>
         </div>
         <section className="report">
           <section className="section">
             <h2>Ingresos</h2>
             <div className="download-icons">
-              <img src="public/img/logoexcel.jpeg" alt="Descargar Excel" onClick={descargarExcel} />
-              <img src="public/img/logopdf.jpeg" alt="Descargar PDF" onClick={descargarPDF} />
+              <img src="/img/logoexcel.jpeg" alt="Descargar Excel" onClick={descargarExcel} />
+              <img src="/img/logopdf.jpeg" alt="Descargar PDF" onClick={descargarPDF} />
             </div>
           </section>
           <section className="section">
             <h2>Egresos</h2>
             <div className="download-icons">
-              <img src="public/img/logoexcel.jpeg" alt="Descargar Excel" onClick={descargarExcel} />
-              <img src="public/img/logopdf.jpeg" alt="Descargar PDF" onClick={descargarPDF} />
+              <img src="/img/logoexcel.jpeg" alt="Descargar Excel" onClick={descargarExcel} />
+              <img src="/img/logopdf.jpeg" alt="Descargar PDF" onClick={descargarPDF} />
             </div>
           </section>
         </section>
-        {facturaFiltrada && (
-          <div className="factura">
-            <h2>Factura Registrada:</h2>
-            <p>Número: {facturaFiltrada.numero}</p>
-            <p>Monto: {facturaFiltrada.monto}</p>
-            <p>Categoría: {facturaFiltrada.categoria}</p>
-            <p>Vendedor: {facturaFiltrada.vendedor}</p>
-            <p>Ciudad: {facturaFiltrada.ciudad}</p>
-            <p>Fecha: {facturaFiltrada.fecha}</p>
-          </div>
+        {facturasFiltradas.length > 0 ? (
+          facturasFiltradas.map((factura, index) => (
+            <div className="factura" key={index}>
+              <h2>Factura Registrada:</h2>
+              <p>Número: {factura.numero}</p>
+              <p>Monto: {factura.monto}</p>
+              <p>Categoría: {factura.categoria}</p>
+              <p>Vendedor: {factura.vendedor}</p>
+              <p>Ciudad: {factura.ciudad}</p>
+              <p>Fecha: {factura.fecha}</p>
+            </div>
+          ))
+        ) : (
+          <p>No se encontraron facturas con los filtros seleccionados.</p>
         )}
       </main>
     </div>
@@ -126,4 +143,6 @@ const Egresos = () => {
 };
 
 export default Egresos;
+
+
 

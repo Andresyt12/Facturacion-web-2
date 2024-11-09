@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import './RegistroFac.css';
@@ -6,7 +6,7 @@ import { FaSignOutAlt } from 'react-icons/fa';
 
 const RegistroFac = () => {
   const navigate = useNavigate(); 
-  
+
   const [factura, setFactura] = useState({
     numero: '',
     monto: '',
@@ -17,7 +17,7 @@ const RegistroFac = () => {
   });
 
   // Inicializamos con 10 registros predeterminados
-  const [facturasList, setFacturasList] = useState([
+  const facturasIniciales = [
     { numero: '001', monto: '1000', categoria: 'Laptop', vendedor: 'Carlos', ciudad: 'Medellin', fecha: '2024-11-01' },
     { numero: '002', monto: '150', categoria: 'Celulares', vendedor: 'Ana', ciudad: 'Cali', fecha: '2024-11-02' },
     { numero: '003', monto: '300', categoria: 'Tablet', vendedor: 'Luis', ciudad: 'Bogota', fecha: '2024-11-03' },
@@ -28,7 +28,24 @@ const RegistroFac = () => {
     { numero: '008', monto: '1200', categoria: 'Laptop', vendedor: 'Elena', ciudad: 'Medellin', fecha: '2024-11-08' },
     { numero: '009', monto: '200', categoria: 'Audífonos', vendedor: 'Daniel', ciudad: 'Cali', fecha: '2024-11-09' },
     { numero: '010', monto: '50', categoria: 'Tablet', vendedor: 'Pedro', ciudad: 'Bogota', fecha: '2024-11-10' }
-  ]);
+  ];
+
+  const [facturasList, setFacturasList] = useState([]);
+
+  // Cargar facturas desde localStorage al montar el componente
+  useEffect(() => {
+    const facturasGuardadas = localStorage.getItem('facturas');
+    if (facturasGuardadas) {
+      setFacturasList(JSON.parse(facturasGuardadas));
+    } else {
+      setFacturasList(facturasIniciales);
+    }
+  }, []);
+
+  // Guardar facturas en localStorage cada vez que facturasList cambie
+  useEffect(() => {
+    localStorage.setItem('facturas', JSON.stringify(facturasList));
+  }, [facturasList]);
 
   // Función para manejar los cambios en los inputs
   const handleChange = (e) => {
