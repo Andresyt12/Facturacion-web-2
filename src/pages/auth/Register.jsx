@@ -1,32 +1,30 @@
 import { useState } from 'react';
+import { FaSignOutAlt } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import './Egresos.css';
 import './Register.css';
-import { FaSignOutAlt } from 'react-icons/fa';
 
 const Register = () => {
     const navigate = useNavigate();
 
     const [factura, setFactura] = useState({
-        numero: '',
         monto: '',
         categoria: '',
-        ciudad: '',
         fecha: ''
     });
 
-    // Inicializamos con 10 registros predeterminados
+    // Inicializamos con 10 registros predeterminados sin los campos "numero" y "ciudad"
     const [facturasList, setFacturasList] = useState([
-        { numero: '001', monto: '1000', categoria: 'Laptop', ciudad: 'Medellin', fecha: '2024-11-01' },
-        { numero: '002', monto: '150', categoria: 'Celulares', ciudad: 'Bogota', fecha: '2024-11-02' },
-        { numero: '003', monto: '300', categoria: 'Tablet', ciudad: 'Cali', fecha: '2024-11-03' },
-        { numero: '004', monto: '800', categoria: 'Laptop', ciudad: 'Bucaramanga', fecha: '2024-11-04' },
-        { numero: '005', monto: '500', categoria: 'Audífonos', ciudad: 'Cartagena', fecha: '2024-11-05' },
-        { numero: '006', monto: '250', categoria: 'DDS', ciudad: 'Medellin', fecha: '2024-11-06' },
-        { numero: '007', monto: '100', categoria: 'Celulares', ciudad: 'Cali', fecha: '2024-11-07' },
-        { numero: '008', monto: '1200', categoria: 'Laptop', ciudad: 'Bogota', fecha: '2024-11-08' },
-        { numero: '009', monto: '200', categoria: 'Audífonos', ciudad: 'Medellin', fecha: '2024-11-09' },
-        { numero: '010', monto: '50', categoria: 'Tablet', ciudad: 'Cali', fecha: '2024-11-10' }
+        { monto: '1000', categoria: 'Laptop', fecha: '2024-11-01' },
+        { monto: '150', categoria: 'Celulares', fecha: '2024-11-02' },
+        { monto: '300', categoria: 'Tablet', fecha: '2024-11-03' },
+        { monto: '800', categoria: 'Laptop', fecha: '2024-11-04' },
+        { monto: '500', categoria: 'Audífonos', fecha: '2024-11-05' },
+        { monto: '250', categoria: 'DDS', fecha: '2024-11-06' },
+        { monto: '100', categoria: 'Celulares', fecha: '2024-11-07' },
+        { monto: '1200', categoria: 'Laptop', fecha: '2024-11-08' },
+        { monto: '200', categoria: 'Audífonos', fecha: '2024-11-09' },
+        { monto: '50', categoria: 'Tablet', fecha: '2024-11-10' }
     ]);
 
     const handleChange = (e) => {
@@ -35,14 +33,12 @@ const Register = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Guardamos el registro en la lista
+        // Guardamos el registro en la lista sin los campos eliminados
         setFacturasList([...facturasList, factura]);
         // Limpiamos los campos del formulario
         setFactura({
-            numero: '',
             monto: '',
             categoria: '',
-            ciudad: '',
             fecha: ''
         });
         alert('Factura registrada con éxito');
@@ -92,16 +88,6 @@ const Register = () => {
                 <div className="input-container">
                     <form onSubmit={handleSubmit} className="horizontal-form">
                         <label>
-                            Número de Factura:
-                            <input
-                                type="text"
-                                name="numero"
-                                value={factura.numero}
-                                onChange={handleChange}
-                                required
-                            />
-                        </label>
-                        <label>
                             Monto:
                             <input
                                 type="number"
@@ -128,16 +114,6 @@ const Register = () => {
                             </select>
                         </label>
                         <label>
-                            Ciudad:
-                            <input
-                                type="text"
-                                name="ciudad"
-                                value={factura.ciudad}
-                                onChange={handleChange}
-                                required
-                            />
-                        </label>
-                        <label>
                             Fecha:
                             <input
                                 type="date"
@@ -153,10 +129,8 @@ const Register = () => {
                                 type="button" 
                                 className="cancel-btn" 
                                 onClick={() => setFactura({
-                                    numero: '',
                                     monto: '',
                                     categoria: '',
-                                    ciudad: '',
                                     fecha: ''
                                 })}
                             >
@@ -171,10 +145,8 @@ const Register = () => {
                     <div className="factura-grid">
                         {facturasList.map((factura, index) => (
                             <div key={index} className="factura-item">
-                                <div><strong>Factura Nº:</strong> {factura.numero}</div>
                                 <div><strong>Monto:</strong> {factura.monto}</div>
                                 <div><strong>Categoría:</strong> {factura.categoria}</div>
-                                <div><strong>Ciudad:</strong> {factura.ciudad}</div>
                                 <div><strong>Fecha:</strong> {factura.fecha}</div>
                                 <button onClick={() => handleDelete(index)} className="delete-btn">Eliminar</button>
                             </div>
