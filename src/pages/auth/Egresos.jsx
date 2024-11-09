@@ -9,14 +9,14 @@ const Egresos = () => {
   const [ciudadFiltro, setCiudadFiltro] = useState('');
 
   useEffect(() => {
-    // Recuperar los datos de facturas desde localStorage al cargar el componente
+   
     const facturasGuardadas = localStorage.getItem('facturas');
     if (facturasGuardadas) {
       setFacturas(JSON.parse(facturasGuardadas));
     }
   }, []);
 
-  // Función para obtener facturas filtradas por fecha y ciudad
+
   const obtenerFacturasFiltradas = () => {
     return facturas.filter(factura =>
       (fechaFiltro === '' || factura.fecha === fechaFiltro) &&
@@ -24,7 +24,6 @@ const Egresos = () => {
     );
   };
 
-  // Función para descargar las facturas en formato PDF
   const descargarPDF = () => {
     const facturasFiltradas = obtenerFacturasFiltradas();
     if (facturasFiltradas.length === 0) return;
