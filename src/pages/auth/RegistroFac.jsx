@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import './RegistroFac.css';
 import { FaSignOutAlt } from 'react-icons/fa'; 
 
@@ -34,7 +35,7 @@ const RegistroFac = () => {
     setFactura({ ...factura, [e.target.name]: e.target.value });
   };
 
-  // Función para manejar el envío del formulario
+
   const handleSubmit = (e) => {
     e.preventDefault();
     // Guardamos el nuevo registro en la lista
@@ -48,7 +49,13 @@ const RegistroFac = () => {
       ciudad: '',
       fecha: ''
     });
-    alert('Factura registrada con éxito');
+   
+    Swal.fire({
+      title: 'Éxito',
+      text: 'Factura registrada con éxito',
+      icon: 'success',
+      confirmButtonText: 'Aceptar'
+    });
   };
 
   const handleLogout = () => {

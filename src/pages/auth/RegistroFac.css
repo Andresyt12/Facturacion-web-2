@@ -207,10 +207,10 @@ select {
     }
 }
 
-/* Móviles (hasta 480px) */
+
 @media (max-width: 480px) {
     .sidebar {
-        display: none; /* Escondemos la sidebar en pantallas muy pequeñas */
+        display: none; /
     }
 
     .factura-pro {

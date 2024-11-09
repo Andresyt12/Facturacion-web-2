@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import './Egresos.css';
 import './Register.css';
 import { FaSignOutAlt } from 'react-icons/fa';
+import Swal from 'sweetalert2';
 
 const Register = () => {
     const navigate = useNavigate();
@@ -15,7 +16,6 @@ const Register = () => {
         fecha: ''
     });
 
-    // Inicializamos con 10 registros predeterminados
     const [facturasList, setFacturasList] = useState([
         { numero: '001', monto: '1000', categoria: 'Laptop', ciudad: 'Medellin', fecha: '2024-11-01' },
         { numero: '002', monto: '150', categoria: 'Celulares', ciudad: 'Bogota', fecha: '2024-11-02' },
@@ -35,9 +35,9 @@ const Register = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Guardamos el registro en la lista
+       
         setFacturasList([...facturasList, factura]);
-        // Limpiamos los campos del formulario
+
         setFactura({
             numero: '',
             monto: '',
@@ -45,7 +45,13 @@ const Register = () => {
             ciudad: '',
             fecha: ''
         });
-        alert('Factura registrada con éxito');
+      
+        Swal.fire({
+            icon: 'success',
+            title: 'Factura registrada con éxito',
+            showConfirmButton: false,
+            timer: 1500
+        });
     };
 
     const handleLogout = () => {
@@ -53,7 +59,7 @@ const Register = () => {
     };
 
     const handleDelete = (index) => {
-        // Eliminamos el registro seleccionado
+    
         const newList = facturasList.filter((_, i) => i !== index);
         setFacturasList(newList);
     };
@@ -187,5 +193,3 @@ const Register = () => {
 };
 
 export default Register;
-
-
