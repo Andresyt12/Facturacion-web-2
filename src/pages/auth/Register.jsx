@@ -4,42 +4,50 @@ import { Link, useNavigate } from 'react-router-dom';
 import './Egresos.css';
 import './Register.css';
 
+const IVA_RATE = 0.16; // Tasa de IVA del 16%
+
 const Register = () => {
     const navigate = useNavigate();
 
     const [factura, setFactura] = useState({
         monto: '',
         categoria: '',
-        fecha: ''
+        fecha: '',
+        iva: 0,
+        total: 0,
     });
 
-    // Inicializamos con 10 registros predeterminados sin los campos "numero" y "ciudad"
     const [facturasList, setFacturasList] = useState([
-        { monto: '1000', categoria: 'Laptop', fecha: '2024-11-01' },
-        { monto: '150', categoria: 'Celulares', fecha: '2024-11-02' },
-        { monto: '300', categoria: 'Tablet', fecha: '2024-11-03' },
-        { monto: '800', categoria: 'Laptop', fecha: '2024-11-04' },
-        { monto: '500', categoria: 'Audífonos', fecha: '2024-11-05' },
-        { monto: '250', categoria: 'DDS', fecha: '2024-11-06' },
-        { monto: '100', categoria: 'Celulares', fecha: '2024-11-07' },
-        { monto: '1200', categoria: 'Laptop', fecha: '2024-11-08' },
-        { monto: '200', categoria: 'Audífonos', fecha: '2024-11-09' },
-        { monto: '50', categoria: 'Tablet', fecha: '2024-11-10' }
+        { monto: 1000, categoria: 'Cliente', fecha: '2024-11-01', iva: 160, total: 1.60 },
+        { monto: 150, categoria: 'Empresas', fecha: '2024-11-02', iva: 24, total: 174 },
+        { monto: 300, categoria: 'Cliente', fecha: '2024-11-03', iva: 48, total: 348 },
+        { monto: 800, categoria: 'Empresas', fecha: '2024-11-04', iva: 128, total: 928 },
+        { monto: 500, categoria: 'Cliente', fecha: '2024-11-05', iva: 80, total: 580 },
+        { monto: 250, categoria: 'Empresas', fecha: '2024-11-06', iva: 40, total: 290 },
+        { monto: 100, categoria: 'Cliente', fecha: '2024-11-07', iva: 16, total: 116 },
+        { monto: 1200, categoria: 'Empresas', fecha: '2024-11-08', iva: 192, total: 1392 },
+        { monto: 200, categoria: 'Cliente', fecha: '2024-11-09', iva: 32, total: 232 },
+        { monto: 50, categoria: 'Empresas', fecha: '2024-11-10', iva: 8, total: 58 },
     ]);
 
     const handleChange = (e) => {
-        setFactura({ ...factura, [e.target.name]: e.target.value });
+        const { name, value } = e.target;
+        const monto = name === "monto" ? parseFloat(value) || 0 : parseFloat(factura.monto) || 0;
+        const iva = monto * IVA_RATE;
+        const total = monto + iva;
+
+        setFactura({ ...factura, [name]: value, iva, total });
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Guardamos el registro en la lista sin los campos eliminados
         setFacturasList([...facturasList, factura]);
-        // Limpiamos los campos del formulario
         setFactura({
             monto: '',
             categoria: '',
-            fecha: ''
+            fecha: '',
+            iva: 0,
+            total: 0,
         });
         alert('Factura registrada con éxito');
     };
@@ -49,7 +57,6 @@ const Register = () => {
     };
 
     const handleDelete = (index) => {
-        // Eliminamos el registro seleccionado
         const newList = facturasList.filter((_, i) => i !== index);
         setFacturasList(newList);
     };
@@ -88,16 +95,6 @@ const Register = () => {
                 <div className="input-container">
                     <form onSubmit={handleSubmit} className="horizontal-form">
                         <label>
-                            Monto:
-                            <input
-                                type="number"
-                                name="monto"
-                                value={factura.monto}
-                                onChange={handleChange}
-                                required
-                            />
-                        </label>
-                        <label>
                             Categoría:
                             <select
                                 name="categoria"
@@ -106,13 +103,22 @@ const Register = () => {
                                 required
                             >
                                 <option value="">Seleccione una categoría</option>
-                                <option value="DDS">DDS</option>
-                                <option value="Laptop">Laptop</option>
-                                <option value="Audífonos">Audífonos</option>
-                                <option value="Tablet">Tablet</option>
-                                <option value="Celulares">Celulares</option>
+                                <option value="Clientes">Clientes</option>
+                                <option value="Empresas">Empresas</option>
                             </select>
                         </label>
+
+                        <label>
+                            Monto por Servicios:
+                            <input
+                                type="number"
+                                name="monto"
+                                value={factura.monto}
+                                onChange={handleChange}
+                                required
+                            />
+                        </label>
+                        
                         <label>
                             Fecha:
                             <input
@@ -123,6 +129,7 @@ const Register = () => {
                                 required
                             />
                         </label>
+                        
                         <div className="button-group">
                             <button type="submit" className="register-btn">Agregar</button>
                             <button 
@@ -131,7 +138,9 @@ const Register = () => {
                                 onClick={() => setFactura({
                                     monto: '',
                                     categoria: '',
-                                    fecha: ''
+                                    fecha: '',
+                                    iva: 0,
+                                    total: 0,
                                 })}
                             >
                                 Limpiar
@@ -145,7 +154,9 @@ const Register = () => {
                     <div className="factura-grid">
                         {facturasList.map((factura, index) => (
                             <div key={index} className="factura-item">
-                                <div><strong>Monto:</strong> {factura.monto}</div>
+                                <div><strong>Monto:</strong> ${factura.monto}</div>
+                                <div><strong>IVA:</strong> ${factura.iva.toFixed(2)}</div>
+                                <div><strong>Total:</strong> ${factura.total.toFixed(2)}</div>
                                 <div><strong>Categoría:</strong> {factura.categoria}</div>
                                 <div><strong>Fecha:</strong> {factura.fecha}</div>
                                 <button onClick={() => handleDelete(index)} className="delete-btn">Eliminar</button>
@@ -159,5 +170,6 @@ const Register = () => {
 };
 
 export default Register;
+
 
 
