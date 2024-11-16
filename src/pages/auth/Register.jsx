@@ -8,60 +8,60 @@ import Swal from 'sweetalert2';
 const Register = () => {
     const navigate = useNavigate();
 
+    // Estado para la factura (campo para agregar nueva factura)
     const [factura, setFactura] = useState({
         numero: '',
         monto: '',
-        categoria: '',
-        ciudad: '',
+        tipoGasto: '',
+        medioPago: '',
+        estadoPago: '',
         fecha: ''
     });
 
+    // Estado para la lista de facturas
     const [facturasList, setFacturasList] = useState([
-        { numero: '001', monto: '1000', categoria: 'Laptop', ciudad: 'Medellin', fecha: '2024-11-01' },
-        { numero: '002', monto: '150', categoria: 'Celulares', ciudad: 'Bogota', fecha: '2024-11-02' },
-        { numero: '003', monto: '300', categoria: 'Tablet', ciudad: 'Cali', fecha: '2024-11-03' },
-        { numero: '004', monto: '800', categoria: 'Laptop', ciudad: 'Bucaramanga', fecha: '2024-11-04' },
-        { numero: '005', monto: '500', categoria: 'Audífonos', ciudad: 'Cartagena', fecha: '2024-11-05' },
-        { numero: '006', monto: '250', categoria: 'DDS', ciudad: 'Medellin', fecha: '2024-11-06' },
-        { numero: '007', monto: '100', categoria: 'Celulares', ciudad: 'Cali', fecha: '2024-11-07' },
-        { numero: '008', monto: '1200', categoria: 'Laptop', ciudad: 'Bogota', fecha: '2024-11-08' },
-        { numero: '009', monto: '200', categoria: 'Audífonos', ciudad: 'Medellin', fecha: '2024-11-09' },
-        { numero: '010', monto: '50', categoria: 'Tablet', ciudad: 'Cali', fecha: '2024-11-10' }
+        { numero: '001', monto: '1000', tipoGasto: 'Equipo', medioPago: 'Efectivo', estadoPago: 'Pago Realizado', fecha: '2024-11-01' },
+        { numero: '002', monto: '150', tipoGasto: 'Mantenimiento', medioPago: 'Tarjeta', estadoPago: 'Pendiente por Pagar', fecha: '2024-11-02' },
+        { numero: '003', monto: '300', tipoGasto: 'Equipo', medioPago: 'Transferencia', estadoPago: 'Pago Realizado', fecha: '2024-11-03' },
+        { numero: '004', monto: '500', tipoGasto: 'Mantenimiento', medioPago: 'Tarjeta', estadoPago: 'Pago Realizado', fecha: '2024-11-04' },
+        { numero: '005', monto: '1200', tipoGasto: 'Equipo', medioPago: 'Efectivo', estadoPago: 'Pendiente por Pagar', fecha: '2024-11-05' },
+        { numero: '006', monto: '700', tipoGasto: 'Mantenimiento', medioPago: 'Transferencia', estadoPago: 'Pago Realizado', fecha: '2024-11-06' }
     ]);
 
+    // Maneja los cambios en los campos del formulario de factura
     const handleChange = (e) => {
         setFactura({ ...factura, [e.target.name]: e.target.value });
     };
 
+    // Maneja el envío del formulario de nueva factura
     const handleSubmit = (e) => {
         e.preventDefault();
-       
+
+        // Agregar la nueva factura a la lista
         setFacturasList([...facturasList, factura]);
 
+        // Limpiar los campos del formulario
         setFactura({
             numero: '',
             monto: '',
-            categoria: '',
-            ciudad: '',
+            tipoGasto: '',
+            medioPago: '',
+            estadoPago: '',
             fecha: ''
         });
-      
+
+        // Notificación de éxito
         Swal.fire({
             icon: 'success',
-            title: 'Factura registrada con éxito',
+            title: 'Factura agregada con éxito',
             showConfirmButton: false,
             timer: 1500
         });
     };
 
+    // Maneja el cierre de sesión
     const handleLogout = () => {
         navigate('/Login');
-    };
-
-    const handleDelete = (index) => {
-    
-        const newList = facturasList.filter((_, i) => i !== index);
-        setFacturasList(newList);
     };
 
     return (
@@ -93,8 +93,8 @@ const Register = () => {
                     <FaSignOutAlt size={20} />
                 </button>
 
-                <h1>Ingresar Gastos</h1>
-                
+                <h1>Agregar Gasto</h1>
+
                 <div className="input-container">
                     <form onSubmit={handleSubmit} className="horizontal-form">
                         <label>
@@ -118,30 +118,45 @@ const Register = () => {
                             />
                         </label>
                         <label>
-                            Categoría:
+                            Tipo de Gasto:
                             <select
-                                name="categoria"
-                                value={factura.categoria}
+                                name="tipoGasto"
+                                value={factura.tipoGasto}
                                 onChange={handleChange}
                                 required
                             >
-                                <option value="">Seleccione una categoría</option>
-                                <option value="DDS">DDS</option>
-                                <option value="Laptop">Laptop</option>
-                                <option value="Audífonos">Audífonos</option>
-                                <option value="Tablet">Tablet</option>
-                                <option value="Celulares">Celulares</option>
+                                <option value="">Seleccione un tipo de gasto</option>
+                                <option value="Nomina">Nómina</option>
+                                <option value="Marketing">Marketing</option>
+                                <option value="Impuestos">Impuestos</option>
+                                <option value="Insumos">Insumos</option>
                             </select>
                         </label>
                         <label>
-                            Ciudad:
-                            <input
-                                type="text"
-                                name="ciudad"
-                                value={factura.ciudad}
+                            Medio de Pago:
+                            <select
+                                name="medioPago"
+                                value={factura.medioPago}
                                 onChange={handleChange}
                                 required
-                            />
+                            >
+                                <option value="">Seleccione un medio de pago</option>
+                                <option value="Efectivo">Efectivo</option>
+                                <option value="Tarjeta">Tarjeta</option>
+                            </select>
+                        </label>
+                        <label>
+                            Estado de Pago:
+                            <select
+                                name="estadoPago"
+                                value={factura.estadoPago}
+                                onChange={handleChange}
+                                required
+                            >
+                                <option value="">Seleccione el estado de pago</option>
+                                <option value="Pago Realizado">Pago Realizado</option>
+                                <option value="Pendiente por Pagar">Pendiente por Pagar</option>
+                            </select>
                         </label>
                         <label>
                             Fecha:
@@ -154,15 +169,16 @@ const Register = () => {
                             />
                         </label>
                         <div className="button-group">
-                            <button type="submit" className="register-btn">Agregar</button>
+                            <button type="submit" className="register-btn">Agregar Factura</button>
                             <button 
                                 type="button" 
                                 className="cancel-btn" 
                                 onClick={() => setFactura({
                                     numero: '',
                                     monto: '',
-                                    categoria: '',
-                                    ciudad: '',
+                                    tipoGasto: '',
+                                    medioPago: '',
+                                    estadoPago: '',
                                     fecha: ''
                                 })}
                             >
@@ -171,7 +187,7 @@ const Register = () => {
                         </div>
                     </form>
                 </div>
-                
+
                 <div className="results-container">
                     <h2>Lista de Facturas</h2>
                     <div className="factura-grid">
@@ -179,10 +195,10 @@ const Register = () => {
                             <div key={index} className="factura-item">
                                 <div><strong>Factura Nº:</strong> {factura.numero}</div>
                                 <div><strong>Monto:</strong> {factura.monto}</div>
-                                <div><strong>Categoría:</strong> {factura.categoria}</div>
-                                <div><strong>Ciudad:</strong> {factura.ciudad}</div>
+                                <div><strong>Tipo de Gasto:</strong> {factura.tipoGasto}</div>
+                                <div><strong>Medio de Pago:</strong> {factura.medioPago}</div>
+                                <div><strong>Estado de Pago:</strong> {factura.estadoPago}</div>
                                 <div><strong>Fecha:</strong> {factura.fecha}</div>
-                                <button onClick={() => handleDelete(index)} className="delete-btn">Eliminar</button>
                             </div>
                         ))}
                     </div>
@@ -192,4 +208,4 @@ const Register = () => {
     );
 };
 
-export default Register;
+export default Register
