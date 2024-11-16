@@ -90,7 +90,7 @@ const Register = () => {
                     <FaSignOutAlt size={20} />
                 </button>
 
-                <h1>Ingresar Gastos</h1>
+                <h1>Ingresar Egresos</h1>
                 
                 <div className="input-container">
                     <form onSubmit={handleSubmit} className="horizontal-form">

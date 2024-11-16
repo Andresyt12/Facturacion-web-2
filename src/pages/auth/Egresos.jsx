@@ -76,7 +76,7 @@ const Egresos = () => {
         <ul className="menu">
           <li><a href="/RegistroFac">Facturas</a></li>
           <li><a href="/Register">Gastos</a></li>
-          <li><a href="/Egresos">Reportes</a></li>
+          <li><a href="/Egresos">Informes</a></li>
         </ul>
         <button className="logout-btn" onClick={handleLogout}>Salir</button>
       </div>
@@ -109,17 +109,7 @@ const Egresos = () => {
             </div>
           </section>
         </section>
-        {facturaFiltrada && (
-          <div className="factura">
-            <h2>Factura Registrada:</h2>
-            <p>Número: {facturaFiltrada.numero}</p>
-            <p>Monto: {facturaFiltrada.monto}</p>
-            <p>Categoría: {facturaFiltrada.categoria}</p>
-            <p>Vendedor: {facturaFiltrada.vendedor}</p>
-            <p>Ciudad: {facturaFiltrada.ciudad}</p>
-            <p>Fecha: {facturaFiltrada.fecha}</p>
-          </div>
-        )}
+        
       </main>
     </div>
   );
