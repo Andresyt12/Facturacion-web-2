@@ -38,7 +38,11 @@ const Register = () => {
         e.preventDefault();
 
         // Agregar la nueva factura a la lista
-        setFacturasList([...facturasList, factura]);
+        const nuevaListaDeFacturas = [...facturasList, factura];
+        setFacturasList(nuevaListaDeFacturas);
+
+        // Guardar la nueva lista de facturas en localStorage
+        localStorage.setItem('gastos', JSON.stringify(nuevaListaDeFacturas));
 
         // Limpiar los campos del formulario
         setFactura({
@@ -189,7 +193,7 @@ const Register = () => {
                 </div>
 
                 <div className="results-container">
-                    <h2>Lista de Facturas</h2>
+                    <h2>Lista de Gastos</h2>
                     <div className="factura-grid">
                         {facturasList.map((factura, index) => (
                             <div key={index} className="factura-item">
@@ -208,4 +212,4 @@ const Register = () => {
     );
 };
 
-export default Register
+export default Register;
